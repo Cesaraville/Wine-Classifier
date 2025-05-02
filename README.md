@@ -17,6 +17,7 @@
 ### Used a confusion matrix and classification report for insight into per-class performance
 ### Random Forest Model
 Multiclass AUC: 0.9892
+
               precision    recall  f1-score   support
 
            0       0.99      0.99      0.99       291
