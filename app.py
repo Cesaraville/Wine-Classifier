@@ -8,6 +8,11 @@ app = Flask(__name__)  # This is the 'app' that Gunicorn is trying to find
 
 model = joblib.load('model.pkl')
 
+# Root route to prevent 404 errors
+@app.route('/')
+def home():
+    return "Welcome to the Wine Classifier API!"
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
