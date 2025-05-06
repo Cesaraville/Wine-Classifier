@@ -15,13 +15,12 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    try:
-        data = request.get_json()
-        features = np.array(data['features']).reshape(1, -1)
-        prediction = model.predict(features)
-        return jsonify({'prediction': prediction.tolist()})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 400
+    data = request.get_json()
+    features = np.array(data['features']).reshape(1, -1)
+    print("Received features:", features)  # <-- This line
+    prediction = model.predict(features)
+    return jsonify({'prediction': prediction.tolist()})
+
 
 
 if __name__ == '__main__':
