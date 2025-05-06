@@ -4,8 +4,8 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyPbx/llvAXAth8uwia5ZunK",
-      "include_colab_link": True
+      "authorship_tag": "ABX9TyPu6axNOt+C1K4/kA9N8muc",
+      "include_colab_link": true
     },
     "kernelspec": {
       "name": "python3",
@@ -34,12 +34,14 @@
       },
       "outputs": [],
       "source": [
-        "code = \"\"\"\n",
         "from flask import Flask, request, jsonify\n",
         "import joblib\n",
         "import numpy as np\n",
+        "import os\n",
         "\n",
-        "app = Flask(__name__)\n",
+        "# Flask application instance\n",
+        "app = Flask(__name__)  # This is the 'app' that Gunicorn is trying to find\n",
+        "\n",
         "model = joblib.load('model.pkl')\n",
         "\n",
         "@app.route('/predict', methods=['POST'])\n",
@@ -50,13 +52,9 @@
         "    return jsonify({'prediction': prediction.tolist()})\n",
         "\n",
         "if __name__ == '__main__':\n",
-        "    import os\n",
+        "    # For local testing purposes\n",
         "    port = int(os.environ.get('PORT', 5000))\n",
-        "    app.run(host='0.0.0.0', port=port)\n",
-        "\"\"\"\n",
-        "\n",
-        "with open(\"app.py\", \"w\") as f:\n",
-        "    f.write(code)\n"
+        "    app.run(host='0.0.0.0', port=port)\n"
       ]
     }
   ]
